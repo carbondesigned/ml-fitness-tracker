@@ -22,7 +22,6 @@ from glob import glob
 # Extract features from filename
 # --------------------------------------------------------------
 
-# data_path = '../../data/raw/MetaMotion/'
 # f = files[0]
 
 # participant = f.split("-")[0].replace(data_path, "")
@@ -96,6 +95,8 @@ files = glob("../../data/raw/MetaMotion/*.csv")
 
 
 def read_data_from_files(files):
+    data_path = '../../data/raw/MetaMotion/'
+
     # empty data frames (accelerometer and gyroscope)
     acc_df = pd.DataFrame()
     gyro_df = pd.DataFrame()
@@ -153,9 +154,9 @@ data_merged.columns = [
     "gyro_x",
     "gyro_y",
     "gyro_z",
+    "participant",
     "label",
     "category",
-    "participant",
     "set",
 ]
 
@@ -173,9 +174,9 @@ sampling = {
     "gyro_x": "mean",
     "gyro_y": "mean",
     "gyro_z": "mean",
+    "participant": "last",
     "label": "last",
     "category": "last",
-    "participant": "last",
     "set": "last",
 }
 
@@ -197,4 +198,4 @@ data_resampled.info()
 # Export dataset
 # --------------------------------------------------------------
 
-data_resampled.to_pickle("../../data/interim/01_data_resampled.pkl")
+data_resampled.to_pickle("../../data/interim/01_data_processed.pkl")
